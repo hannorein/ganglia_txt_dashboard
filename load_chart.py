@@ -15,29 +15,28 @@ hosts = [
     "rein005.utsc.utoronto.ca",
     ]
 
-data = []
-for host in hosts:
-    url = "http://localhost/ganglia/graph.php?r=hour&h=%s&m=load_one&s=by+name&mc=2&g=load_report&c=utsc&csv=1"%host
-
-    request = urllib2.Request(url)
-    csv = urllib2.urlopen(request).readlines()
-
-    one = []
-    one.append(1.)
-
-    for l in csv[-(width-1):]:
-        c = l.split(",")
-        if c[1] == "NaN":
-            v = 0.
-        else:
-            try:
-                v = float(c[1])/float(c[2])
-            except: 
-                v =0.
-        one.append(v)
-    data.append(one)
-
 while 1:
+    data = []
+    for host in hosts:
+        url = "http://localhost/ganglia/graph.php?r=hour&h=%s&m=load_one&s=by+name&mc=2&g=load_report&c=utsc&csv=1"%host
+
+        request = urllib2.Request(url)
+        csv = urllib2.urlopen(request).readlines()
+
+        one = []
+
+        for l in csv[-width:]:
+            c = l.split(",")
+            if c[1] == "NaN" or c[2]=="NaN":
+                v = 0.
+            else:
+                try:
+                    v = float(c[1])/float(c[2])
+                except: 
+                    v =0.
+            one.append(v)
+        data.append(one)
+
     os.system('clear')
     for i,host in enumerate(hosts):
         print host

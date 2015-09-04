@@ -57,7 +57,7 @@ def vertical_graph(nums, height=10):
 
     """
     character = u"\u2588"
-    character = "I"
+    #character = "I"
     nums = [int(round(n * float(height))) for n in nums]
 
     out = ""
@@ -69,5 +69,7 @@ def vertical_graph(nums, height=10):
                 out = out + character
             else:
                 out = out + ' '
-        out = out + "\n"
-    return out.strip()
+        out = out
+	if i!=1:
+		out = out + "\n"
+    return out
