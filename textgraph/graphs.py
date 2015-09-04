@@ -58,8 +58,7 @@ def vertical_graph(nums, height=10):
     """
     character = u"\u2588"
     character = "I"
-    fraction = max(nums) / float(height)
-    nums = [int(round(n / fraction)) for n in nums]
+    nums = [int(round(n * float(height))) for n in nums]
 
     out = ""
     row_numbers = range(1, height + 1)
