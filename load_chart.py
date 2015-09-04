@@ -1,4 +1,4 @@
-import os
+import os, time
 import urllib2
 import textgraph
 
@@ -31,11 +31,15 @@ for host in hosts:
             v = 0.
         else:
             try:
-                v = float(c[1])
+                v = float(c[1])/float(c[2])
             except: 
                 v =0.
         one.append(v)
     data.append(one)
 
-for i,host in enumerate(hosts):
-    print textgraph.vertical_graph(data[i], height=(height)/len(hosts)-1)
+while 1:
+    os.system('clear')
+    for i,host in enumerate(hosts):
+        print host
+        print textgraph.vertical_graph(data[i], height=(height)/len(hosts)-1)
+    time.sleep(10)

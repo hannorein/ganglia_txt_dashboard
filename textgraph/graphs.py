@@ -56,7 +56,8 @@ def vertical_graph(nums, height=10):
     height -- height of largest bar (int)
 
     """
-    character = '▉'
+    character = u"\u2588"
+    character = "I"
     fraction = max(nums) / float(height)
     nums = [int(round(n / fraction)) for n in nums]
 
@@ -70,4 +71,4 @@ def vertical_graph(nums, height=10):
             else:
                 out = out + ' '
         out = out + "\n"
-    return out
+    return out.strip()
