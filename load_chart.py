@@ -27,9 +27,14 @@ while 1:
 
         for l in csv[-width:]:
             c = l.split(",")
-            if c[1] == "NaN" or c[2]=="NaN":
+            if c[1] == "NaN":
                 v = 0.
             else:
+                if c[2]=="NaN":
+                    if host=="rein002.utsc.utoronto.ca":
+                        c[2]="24"
+                    else:
+                        c[2] = "1"
                 try:
                     v = float(c[1])/float(c[2])
                 except: 
@@ -40,5 +45,7 @@ while 1:
     os.system('clear')
     for i,host in enumerate(hosts):
         print host
-        print textgraph.vertical_graph(data[i], height=(height)/len(hosts)-1)
+        print textgraph.vertical_graph(data[i], height=(height)/len(hosts)-2)
+    os.system("uname -a")
+    os.system("uptime")
     time.sleep(10)
